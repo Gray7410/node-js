@@ -34,6 +34,7 @@ async function removeNotes(id) {
     notesPath,
     JSON.stringify(notes.filter((note) => note.id !== id))
   );
+  console.log(chalk.red(`Note with id ${id} was deleted!`));
 }
 
 module.exports = {
