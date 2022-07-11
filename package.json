@@ -9,6 +9,7 @@
   "author": "Sergey Fomin <gray7410@yandex.ru>",
   "license": "ISC",
   "dependencies": {
+    "chalk": "^4.1.2",
     "yargs": "^17.5.1"
   }
 }
