@@ -4,12 +4,18 @@
   "description": "This is simple NodeJS Application",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js",
+    "serve": "nodemon index.js"
   },
   "author": "Sergey Fomin <gray7410@yandex.ru>",
   "license": "ISC",
   "dependencies": {
     "chalk": "^4.1.2",
+    "ejs": "^3.1.8",
+    "express": "^4.18.1",
     "yargs": "^17.5.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.19"
   }
 }
