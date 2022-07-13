@@ -37,21 +37,16 @@ async function removeNotes(id) {
   console.log(chalk.red(`Note with id ${id} was deleted!`));
 }
 
-async function editNote(id, title) {
+async function editNote(editedNote) {
   const notes = await getNotes();
-  await fs.writeFile(
-    notesPath,
-    JSON.stringify(
-      notes.map((note) => {
-        if (note.id === id) {
-          return { title: title, id: id };
-        }
-        return note;
-      })
-    ),
-    { encoding: "utf-8" }
-  );
-  console.log(chalk.yellow(`Note with id ${id} was edited!`));
+  const index = notes.findIndex((note) => note.id === editedNote.id);
+  if (index >= 0) {
+    notes[index] = { ...notes[index], ...editedNote };
+    await fs.writeFile(notesPath, JSON.stringify(notes));
+    console.log(
+      chalk.yellow(`Note with id "${editedNote.id}" has been updated!`)
+    );
+  }
 }
 
 module.exports = {

@@ -6,11 +6,12 @@ document.addEventListener("click", (event) => {
       target.closest("li").remove();
     });
   } else if (target.dataset.type === "edit") {
-    const id = target.dataset.id;
-    const edited = prompt("Enter new name");
+    const id = event.target.dataset.id;
+    const title = event.target.dataset.title;
+    const edited = prompt("Enter new name", title);
     if (edited) {
-      edit(id, edited);
-      document.getElementById(`note${id}`).textContent = `${edited}`;
+      edit({ id, title: edited });
+      event.target.closest("li").querySelector("p").innerText = edited;
     }
   }
 });
@@ -18,12 +19,12 @@ document.addEventListener("click", (event) => {
 async function remove(id) {
   await fetch(`/${id}`, { method: "DELETE" });
 }
-async function edit(noteId, noteName) {
-  await fetch(`/${noteId}`, {
+async function edit(editedNote) {
+  await fetch(`/${editedNote.id}`, {
     method: "PUT",
     headers: {
       "Content-type": "application/json; charset=UTF-8",
     },
-    body: JSON.stringify({ id: noteId, title: noteName }),
+    body: JSON.stringify(editedNote),
   });
 }
